@@ -11,8 +11,6 @@ Endpoints:
  
 import json
 import logging
-import random
-import string
 import time
 import uuid
 from collections import deque
@@ -122,9 +120,7 @@ async def observability_middleware(request: Request, call_next):
 # ------------------------------------------------------------------
 # Endpoints
 # ------------------------------------------------------------------
-def _fake_email(request_id: str) -> str:
-    local = "".join(random.choices(string.ascii_lowercase + string.digits, k=8))
-    return f"{local}@example.com"
+STUDENT_EMAIL = "24f1000967@ds.study.iitm.ac.in"
  
  
 @app.get("/work")
@@ -133,8 +129,7 @@ async def work(n: int = 1):
     total = 0
     for i in range(n):
         total += i * i  # do actual CPU work, not just sleep
-    email = _fake_email(str(uuid.uuid4()))
-    return {"email": email, "done": n}
+    return {"email": STUDENT_EMAIL, "done": n}
  
  
 @app.get("/healthz")
