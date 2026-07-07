@@ -1,14 +1,32 @@
-#  Badly  Formatted  Markdown    
+Observability Demo Service
 
-*  This is an uneven list
-* With inconsistent spacing
-   *    And weird indentation
+Run locally
 
->This quote has no space
->   This one has too many
+pip install -r requirements.txt
+uvicorn app:app --host 0.0.0.0 --port 8000
 
-f 3 SGkG ERTXOmhWaD6tqesf QqM a bBlT0ZdW 8v6qfF2Eq mMdkizSvC3p 5SvzPhFnv moNunt1 5UPRnm tC t 8 poUH69VsBCVJ  3 HCOkE3Ucr4CvSIGP tRo KbStByom
-GDUbiUA pPS  nb a s4VZGEQiQn f6r HOx  I9hd kMit s Hn1fnh Wk9Wcy ZR1BVt8s J91v lF
-RY1B 8UAkS
-wRidH7mwm9   jTtTOF4xE2 
-LVR Ni uLOGNn9jG4He jJoc6cqEqqrs lHgvZhrH3
+Run with Docker
+
+docker build -t obs-service .
+docker run -p 8000:8000 obs-service
+
+Deploy (pick one, all support a Dockerfile / single-file FastAPI app)
+
+
+Render.com: New Web Service -> connect repo (or "Public Git Repo") -> it will
+detect the Dockerfile, or set Start Command to
+uvicorn app:app --host 0.0.0.0 --port $PORT
+Railway.app: New Project -> Deploy from repo -> same start command as above
+Fly.io: fly launch in this folder (it will pick up the Dockerfile), then fly deploy
+
+
+After deploy, your base URL will look like:
+https://<your-app>.onrender.com
+https://<your-app>.up.railway.app
+https://<your-app>.fly.dev
+
+Endpoints:
+GET /work?n=K
+GET /metrics
+GET /healthz
+GET /logs/tail?limit=N
